@@ -1,7 +1,8 @@
 import React from 'react';
+import HeaderComponent from '../components/HeaderComponet';
 
 const ExploreDrinksByIng = () => (
-  <span>Login...</span>
+  <HeaderComponent />
 );
 
 export default ExploreDrinksByIng;
