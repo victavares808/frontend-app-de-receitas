@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import {
+  mealsToLocalStorage, cocktailsToLocalStorage, userEmailToLocalStorage,
+} from '../helpers/LocalStorage';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleDisableButton = () => {
     const MIN_LENGTH = 6;
@@ -13,6 +18,14 @@ const LoginComponent = () => {
       return false;
     }
     return true;
+  };
+
+  const onClick = () => {
+    mealsToLocalStorage();
+    cocktailsToLocalStorage();
+    userEmailToLocalStorage(email);
+
+    history.push('/foods');
   };
 
   return (
@@ -35,6 +48,7 @@ const LoginComponent = () => {
         type="button"
         data-testid="login-submit-btn"
         disabled={ handleDisableButton() }
+        onClick={ () => onClick() }
       >
         Enter
 

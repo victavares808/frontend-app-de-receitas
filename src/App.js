@@ -5,9 +5,7 @@ import Routes from './helpers/routes';
 
 function App() {
   return (
-
     <Routes />
-
   );
 }
 
