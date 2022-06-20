@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ExploreFoodsByDrinks = () => (
+const ExploreDrinksByIng = () => (
   <span>Login...</span>
 );
 
-export default ExploreFoodsByDrinks;
+export default ExploreDrinksByIng;
