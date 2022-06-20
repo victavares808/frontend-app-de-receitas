@@ -1,7 +1,8 @@
 import React from 'react';
+import HeaderComponent from '../components/HeaderComponet';
 
-const Food = () => (
-  <span>Foods...</span>
+const Foods = () => (
+  <HeaderComponent />
 );
 
-export default Food;
+export default Foods;
