@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const SearchBarHeader = () => {
   const [searchBar, setSearchBar] = useState();
   const [filterType, setIngridient] = useState();
+  console.log(filterType);
 
   return (
     <form>
