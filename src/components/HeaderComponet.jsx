@@ -8,19 +8,19 @@ const HeaderComponent = () => (
     <button
       type="button"
       data-testid="profile-top-btn"
+      src={ imageProfile }
+      alt="imagem do profile"
     // onClick={}
-    >
-      <img src={ imageProfile } alt="imagem do profile" />
+    />
 
-    </button>
     <h2 data-testid="page-title">Foods</h2>
+
     <button
       type="button"
       data-testid="search-top-btn"
-    >
-      <img src={ searchIcon } alt="imagem do profile" />
-
-    </button>
+      src={ searchIcon }
+      alt="imagem do profile"
+    />
   </div>
 );
 
