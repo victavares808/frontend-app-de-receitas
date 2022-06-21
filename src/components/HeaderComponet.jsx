@@ -15,7 +15,7 @@ const HeaderComponent = ({ pageTitle }) => {
         data-testid="profile-top-btn"
         src={ imageProfile }
         alt="imagem do profile"
-        // onClick={}
+        onClick={ () => history.push('/profile') }
       />
 
       <h2 data-testid="page-title">{pageTitle}</h2>
