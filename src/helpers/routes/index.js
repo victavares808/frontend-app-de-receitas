@@ -7,7 +7,7 @@ import Explore from '../../pages/Explore';
 import ExploreDrinks from '../../pages/ExploreDrinks';
 import ExploreFoods from '../../pages/ExploreFoods';
 import ExploreFoodsByIng from '../../pages/ExploreFoodsByIng';
-import Food from '../../pages/Foods';
+import Foods from '../../pages/Foods';
 import Login from '../../pages/Login';
 import ProgressDrink from '../../pages/ProgressDrink';
 import ProgressFood from '../../pages/ProgressFood';
@@ -22,6 +22,11 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={ Login } />
+<<<<<<< HEAD
+=======
+        <Route path="/foods" component={ Foods } />
+        <Route path="/drinks" component={ Drinks } />
+>>>>>>> b0be448e21ce14d35f6306c34522eef85e80ecc4
         <Route path="/foods/:id" component={ DetailsFood } />
         <Route path="/drinks/:id" component={ DetailsDrink } />
         <Route path="/foods/:id/in-progress" component={ ProgressFood } />
