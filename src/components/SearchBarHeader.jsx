@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import RecipesContext from '../context/RecipesContext';
+import FoodsDrinksContext from '../context/FoodsDrinksContext';
 
 const SearchBarHeader = () => {
-  const [searchBar, setSearchBar] = useState();
+  const [searchBar, setSearchBar] = useState('');
   const [filterType, setIngridient] = useState();
-  const { handleFilter } = useContext(RecipesContext);
+  const { handleFilter } = useContext(FoodsDrinksContext);
 
   return (
     <form>

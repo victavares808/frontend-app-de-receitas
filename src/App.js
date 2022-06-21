@@ -7,11 +7,11 @@ import FoodsDrinksProvider from './context/FoodsDrinksProviders';
 
 function App() {
   return (
-    <FoodsDrinksProvider>
-      <RecipesProvider>
+    <RecipesProvider>
+      <FoodsDrinksProvider>
         <Routes />
-      </RecipesProvider>
-    </FoodsDrinksProvider>
+      </FoodsDrinksProvider>
+    </RecipesProvider>
   );
 }
 

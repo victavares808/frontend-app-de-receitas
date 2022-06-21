@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import RecipesContext from './RecipesContext';
+import FoodsDrinksContext from './FoodsDrinksContext';
 
 const FoodsDrinksProvider = ({ children }) => {
   // const [pageType, setPageType] = useState('Foods');
   const [filter, setFilter] = useState({});
-  console.log(filter);
 
   const handleFilter = (searchBar, filterType) => {
     setFilter({
@@ -15,13 +14,14 @@ const FoodsDrinksProvider = ({ children }) => {
   };
 
   const contextValue = {
+    filter,
     handleFilter,
   };
 
   return (
-    <RecipesContext.Provider value={ contextValue }>
+    <FoodsDrinksContext.Provider value={ contextValue }>
       {children}
-    </RecipesContext.Provider>
+    </FoodsDrinksContext.Provider>
   );
 };
 
