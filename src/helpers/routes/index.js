@@ -29,12 +29,12 @@ class Routes extends Component {
         <Route path="/foods" component={ Foods } />
         <Route path="/drinks" component={ Drinks } />
         <Route path="/drinks" component={ Drinks } />
-        <Route path="/explore" component={ Explore } />
-        <Route path="/explore/foods" component={ ExploreFoods } />
-        <Route path="/explore/drinks" component={ ExploreDrinks } />
-        <Route path="/explore/foods/ingredients" component={ ExploreFoodsByIng } />
-        <Route path="/explore/drinks/ingredients" component={ ExploreDrinksByIng } />
         <Route path="/explore/foods/nationalities" component={ ExploreFoodsByNat } />
+        <Route path="/explore/foods/ingredients" component={ ExploreFoodsByIng } />
+        <Route path="/explore/foods" component={ ExploreFoods } />
+        <Route path="/explore/drinks/ingredients" component={ ExploreDrinksByIng } />
+        <Route path="/explore/drinks" component={ ExploreDrinks } />
+        <Route path="/explore" component={ Explore } />
         <Route path="/profile" component={ Profile } />
         <Route path="/done-recipes" component={ DoneRecipes } />
         <Route path="/favorite-recipes" component={ FavoriteRacipes } />

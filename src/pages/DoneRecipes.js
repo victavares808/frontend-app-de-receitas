@@ -1,7 +1,8 @@
 import React from 'react';
+import HeaderComponent from '../components/HeaderComponet';
 
 const DoneRecipes = () => (
-  <span>Login...</span>
+  <HeaderComponent pageTitle="Done Recipes" />
 );
 
 export default DoneRecipes;

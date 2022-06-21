@@ -4,7 +4,7 @@ import HeaderComponent from '../components/HeaderComponet';
 
 const ExploreDrinksByIng = () => (
   <div>
-    <HeaderComponent />
+    <HeaderComponent pageTitle="Explore Ingredients" />
     <FooterComponent />
   </div>
 );

@@ -1,7 +1,8 @@
 import React from 'react';
+import HeaderComponent from '../components/HeaderComponet';
 
 const FavoriteRacipes = () => (
-  <span>Login...</span>
+  <HeaderComponent pageTitle="Favorite Recipes" />
 );
 
 export default FavoriteRacipes;

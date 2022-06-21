@@ -22,7 +22,7 @@ const Profile = () => {
 
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent pageTitle="Profile" />
       <p data-testid="profile-email">{ email }</p>
       <button
         type="button"
