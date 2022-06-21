@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import HeaderComponent from '../components/HeaderComponet';
 
 const Profile = () => {
   const history = useHistory();
@@ -21,6 +22,7 @@ const Profile = () => {
 
   return (
     <div>
+      <HeaderComponent pageTitle="Profile" />
       <p data-testid="profile-email">{ email }</p>
       <button
         type="button"

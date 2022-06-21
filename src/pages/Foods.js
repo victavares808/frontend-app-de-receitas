@@ -1,8 +1,12 @@
 import React from 'react';
 import FooterComponent from '../components/FooterComponent';
+import HeaderComponent from '../components/HeaderComponet';
 
-const Food = () => (
-  <FooterComponent />
+const Foods = () => (
+  <div>
+    <HeaderComponent pageTitle="Foods" />
+    <FooterComponent />
+  </div>
 );
 
-export default Food;
+export default Foods;
