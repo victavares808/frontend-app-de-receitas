@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import RecipesContext from '../context/RecipesContext';
 
 const SearchBarHeader = () => {
   const [searchBar, setSearchBar] = useState();
   const [filterType, setIngridient] = useState();
-  console.log(filterType);
+  const { handleFilter } = useContext(RecipesContext);
 
   return (
     <form>
@@ -37,6 +38,7 @@ const SearchBarHeader = () => {
       <button
         data-testid="exec-search-btn"
         type="button"
+        onClick={ () => handleFilter(searchBar, filterType) }
       >
         Search
       </button>
