@@ -1,7 +1,8 @@
 import React from 'react';
+import FooterComponent from '../components/FooterComponent';
 
 const ExploreFoodsByIng = () => (
-  <span>Login...</span>
+  <FooterComponent />
 );
 
 export default ExploreFoodsByIng;
