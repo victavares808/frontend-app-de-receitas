@@ -10,8 +10,8 @@ const HeaderComponent = ({ pageTitle }) => {
 
   return (
     <div>
-      <button
-        type="button"
+      <input
+        type="image"
         data-testid="profile-top-btn"
         src={ imageProfile }
         alt="imagem do profile"

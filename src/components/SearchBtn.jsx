@@ -5,8 +5,8 @@ import RecipesContext from '../context/RecipesContext';
 const SearchBtn = () => {
   const { handleSearch } = useContext(RecipesContext);
   return (
-    <button
-      type="button"
+    <input
+      type="image"
       data-testid="search-top-btn"
       src={ searchIcon }
       alt="imagem do profile"
