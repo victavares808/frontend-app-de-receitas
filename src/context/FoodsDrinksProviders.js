@@ -53,7 +53,7 @@ const FoodsDrinksProvider = ({ children }) => {
       }
     };
     fetchApi(filter);
-  }, [filter, pageType]);
+  }, [filter, pageType, meals, history]);
 
   useEffect(() => {
     const fetchApi = async ({ filterType, searchBar }) => {
@@ -80,7 +80,20 @@ const FoodsDrinksProvider = ({ children }) => {
       }
     };
     fetchApi(filter);
-  }, [filter, pageType]);
+  }, [filter, pageType, drinks]);
+
+  useEffect(() => {
+    if (pageType === 'foods' && !meals) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (meals.length === 1) {
+      history.push(`/foods/${meals[0].idMeal}`);
+    }
+    if (pageType === 'drinks' && !drinks) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (drinks.length === 1) {
+      history.push(`/drinks/${drinks[0].idDrink}`);
+    }
+  }, [meals, drinks, pageType, history]);
 
   const handleFilter = (searchBar, filterType) => {
     setFilter({
