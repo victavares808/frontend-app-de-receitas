@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import FooterComponent from '../components/FooterComponent';
 import HeaderComponent from '../components/HeaderComponet';
-import RecipeDetailsComponent from '../components/RecipeDetailsComponent';
+import RecipesContext from '../context/RecipesContext';
+import SearchBarHeader from '../components/SearchBarHeader';
 
-const Drinks = () => (
-  <div>
-    <HeaderComponent pageTitle="Drinks" />
-    <FooterComponent />
-    <RecipeDetailsComponent />
-
-  </div>
-);
+const Drinks = () => {
+  const { isSearch } = useContext(RecipesContext);
+  return (
+    <div>
+      <HeaderComponent pageTitle="Drinks" />
+      {isSearch && <SearchBarHeader />}
+      <FooterComponent />
+    </div>
+  );
+};
 
 export default Drinks;
