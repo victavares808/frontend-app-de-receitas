@@ -5,29 +5,70 @@ import {
   fetchFoodsByIngridient,
   fetchFoodsByName, fetchFoodsByFirstLetter,
 } from '../services/FoodsApi';
+import {
+  fetchDrinksByIngridient,
+  fetchDrinksByName,
+  fetchDrinksByFirstLetter,
+} from '../services/DrinksApi';
 
 const FoodsDrinksProvider = ({ children }) => {
-  // const [pageType, setPageType] = useState('Foods');
+  const [pageType, setPageType] = useState('foods');
   const [filter, setFilter] = useState({});
-  const [meals, setMeals] = useState({});
+  const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
     const fetchApi = async ({ filterType, searchBar }) => {
-      if (filterType === 'ingridient') {
+      if (pageType === 'foods' && filterType === 'ingridient') {
         const ingridient = await fetchFoodsByIngridient(searchBar);
-        return setMeals(ingridient);
+        return (
+          setMeals(ingridient),
+          setFilter({})
+        );
       }
-      if (filterType === 'name') {
+      if (pageType === 'foods' && filterType === 'name') {
         const name = await fetchFoodsByName(searchBar);
-        return setMeals(name);
+        return (
+          setMeals(name),
+          setFilter({})
+        );
       }
-      if (filterType === 'firstLetter') {
+      if (pageType === 'foods' && filterType === 'firstLetter') {
         const firstLetter = await fetchFoodsByFirstLetter(searchBar);
-        return setMeals(firstLetter);
+        return (
+          setMeals(firstLetter),
+          setFilter({}));
       }
     };
     fetchApi(filter);
-  }, [filter]);
+  }, [filter, pageType]);
+
+  useEffect(() => {
+    const fetchApi = async ({ filterType, searchBar }) => {
+      if (pageType === 'drinks' && filterType === 'ingridient') {
+        const ingridient = await fetchDrinksByIngridient(searchBar);
+        return (
+          setDrinks(ingridient),
+          setFilter({})
+        );
+      }
+      if (pageType === 'drinks' && filterType === 'name') {
+        const name = await fetchDrinksByName(searchBar);
+        return (
+          setDrinks(name),
+          setFilter({})
+        );
+      }
+      if (pageType === 'drinks' && filterType === 'firstLetter') {
+        const firstLetter = await fetchDrinksByFirstLetter(searchBar);
+        return (
+          setDrinks(firstLetter),
+          setFilter({})
+        );
+      }
+    };
+    fetchApi(filter);
+  }, [filter, pageType]);
 
   const handleFilter = (searchBar, filterType) => {
     setFilter({
@@ -36,10 +77,17 @@ const FoodsDrinksProvider = ({ children }) => {
     });
   };
 
+  const handlePageType = (value) => {
+    setPageType(value);
+  };
+
   const contextValue = {
     filter,
     meals,
+    drinks,
+    pageType,
     handleFilter,
+    handlePageType,
   };
 
   return (

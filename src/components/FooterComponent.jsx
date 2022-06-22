@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import FoodsDrinksContext from '../context/FoodsDrinksContext';
 
 const FooterComponent = () => {
   const history = useHistory();
+  const { handlePageType } = useContext(FoodsDrinksContext);
 
   const redirectToDrinks = () => {
     history.push('/drinks');
+    handlePageType('drinks');
   };
 
   const redirectToExplore = () => {
@@ -17,6 +20,7 @@ const FooterComponent = () => {
 
   const redirectToFoods = () => {
     history.push('/foods');
+    handlePageType('foods');
   };
 
   return (
