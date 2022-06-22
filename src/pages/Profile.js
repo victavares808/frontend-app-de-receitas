@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import FooterComponent from '../components/FooterComponent';
 import HeaderComponent from '../components/HeaderComponet';
 
 const Profile = () => {
@@ -46,6 +47,7 @@ const Profile = () => {
       >
         Logout
       </button>
+      <FooterComponent />
     </div>
   );
 };
