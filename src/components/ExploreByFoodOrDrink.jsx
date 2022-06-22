@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { fetchRandomFood, fetchRandomDrink } from '../services/RandomApi';
 
 const ExploreByFoodOrDrink = () => {
   const history = useHistory();
@@ -15,6 +16,16 @@ const ExploreByFoodOrDrink = () => {
 
   const redirectToExploreDrinksIng = () => {
     history.push('/explore/drinks/ingredients');
+  };
+
+  const redirectToRandomFood = async () => {
+    const { idMeal } = await fetchRandomFood();
+    history.push(`/foods/${idMeal}`);
+  };
+
+  const redirectToRandomDrinks = async () => {
+    const { idDrink } = await fetchRandomDrink();
+    history.push(`/drinks/${idDrink}`);
   };
 
   return (
@@ -36,7 +47,14 @@ const ExploreByFoodOrDrink = () => {
           >
             By Nationality
           </button>
-          <button type="button" data-testid="explore-surprise">Surprise me!</button>
+          <button
+            type="button"
+            data-testid="explore-surprise"
+            onClick={ redirectToRandomFood }
+          >
+            Surprise me!
+
+          </button>
         </div>
       )}
 
@@ -50,7 +68,14 @@ const ExploreByFoodOrDrink = () => {
             By Ingredient
 
           </button>
-          <button type="button" data-testid="explore-surprise">Surprise me!</button>
+          <button
+            type="button"
+            data-testid="explore-surprise"
+            onClick={ redirectToRandomDrinks }
+          >
+            Surprise me!
+
+          </button>
         </div>
       )}
     </div>
