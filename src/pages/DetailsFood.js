@@ -1,7 +1,8 @@
 import React from 'react';
+import RecipeDetailsComponent from '../components/RecipeDetailsComponent';
 
 const DetailsFood = () => (
-  <span>Login...</span>
+  <RecipeDetailsComponent />
 );
 
 export default DetailsFood;
