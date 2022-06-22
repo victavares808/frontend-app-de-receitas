@@ -21,22 +21,22 @@ const FooterComponent = () => {
 
   return (
     <div data-testid="footer" style={ { position: 'fixed', bottom: '0px' } }>
-      <button
-        type="button"
+      <input
+        type="image"
         data-testid="drinks-bottom-btn"
         src={ drinkIcon }
         alt="Explorar bebidas"
         onClick={ redirectToDrinks }
       />
-      <button
-        type="button"
+      <input
+        type="image"
         data-testid="explore-bottom-btn"
         src={ exploreIcon }
-        alt="Botão explorar"
+        alt="Explorar"
         onClick={ redirectToExplore }
       />
-      <button
-        type="button"
+      <input
+        type="image"
         data-testid="food-bottom-btn"
         src={ mealIcon }
         alt="Explorar comidas"
