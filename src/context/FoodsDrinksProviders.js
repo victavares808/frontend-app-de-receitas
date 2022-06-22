@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import FoodsDrinksContext from './FoodsDrinksContext';
 import {
   fetchFoodsByIngridient,
@@ -12,10 +13,21 @@ import {
 } from '../services/DrinksApi';
 
 const FoodsDrinksProvider = ({ children }) => {
-  const [pageType, setPageType] = useState('foods');
+  const [pageType, setPageType] = useState('');
   const [filter, setFilter] = useState({});
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    const { location: { pathname } } = history;
+    if (pathname === '/foods') {
+      setPageType('foods');
+    }
+    if (pathname === '/drinks') {
+      setPageType('drinks');
+    }
+  }, [history]);
 
   useEffect(() => {
     const fetchApi = async ({ filterType, searchBar }) => {
