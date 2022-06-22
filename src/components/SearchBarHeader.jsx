@@ -3,7 +3,7 @@ import FoodsDrinksContext from '../context/FoodsDrinksContext';
 
 const SearchBarHeader = () => {
   const [searchBar, setSearchBar] = useState('');
-  const [filterType, setIngridient] = useState();
+  const [filterType, setFilterType] = useState();
   const { handleFilter } = useContext(FoodsDrinksContext);
 
   return (
@@ -14,27 +14,39 @@ const SearchBarHeader = () => {
         value={ searchBar }
         onChange={ ({ target }) => setSearchBar(target.value) }
       />
-      <input
-        data-testid="ingredient-search-radio"
-        type="radio"
-        name="filter"
-        value="ingridient"
-        onChange={ ({ target }) => setIngridient(target.value) }
-      />
-      <input
-        data-testid="name-search-radio"
-        type="radio"
-        name="filter"
-        value="name"
-        onChange={ ({ target }) => setIngridient(target.value) }
-      />
-      <input
-        data-testid="first-letter-search-radio"
-        type="radio"
-        name="filter"
-        value="firstLetter"
-        onChange={ ({ target }) => setIngridient(target.value) }
-      />
+      <label htmlFor="ingridient">
+        <input
+          data-testid="ingredient-search-radio"
+          id="ingridient"
+          type="radio"
+          name="filter"
+          value="ingridient"
+          onChange={ ({ target }) => setFilterType(target.value) }
+        />
+        Ingridient
+      </label>
+      <label htmlFor="name">
+        <input
+          data-testid="name-search-radio"
+          id="name"
+          type="radio"
+          name="filter"
+          value="name"
+          onChange={ ({ target }) => setFilterType(target.value) }
+        />
+        Name
+      </label>
+      <label htmlFor="firstLetter">
+        <input
+          data-testid="first-letter-search-radio"
+          id="firstLetter"
+          type="radio"
+          name="filter"
+          value="firstLetter"
+          onChange={ ({ target }) => setFilterType(target.value) }
+        />
+        First Letter
+      </label>
       <button
         data-testid="exec-search-btn"
         type="button"
