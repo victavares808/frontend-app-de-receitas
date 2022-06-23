@@ -27,8 +27,8 @@ const IngredientsCard = () => {
           <section key={ index } data-testid={ `${card.idIngredient}-ingredient-card` }>
             <img
               data-testid={ `${card.idIngredient}-card-img` }
-              alt="imagem"
-              svg="https://img.freepik.com/fotos-gratis/imagem-aproximada-em-tons-de-cinza-de-uma-aguia-careca-americana-em-um-fundo-escuro_181624-31795.jpg?w=740&t=st=1656011452~exp=1656012052~hmac=fc636b8eb98ba16cf9b874d3fe2a5c869df1436094d6ff2b3d6e1eb471729609"
+              alt={ card.strIngredient }
+              src={ `https://www.themealdb.com/images/ingredients/${card.strIngredient}-Small.png` }
             />
             <h3 data-testid={ `${card.strIngredient}-card-name` }>
               {card.strIngredient}
@@ -39,5 +39,4 @@ const IngredientsCard = () => {
     </div>
   );
 };
-
 export default IngredientsCard;
