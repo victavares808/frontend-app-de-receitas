@@ -1,33 +1,41 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+// import { useHistory } from 'react-router-dom';
+import fetchIngredients from '../services/fetchIngredients';
 
 const IngredientsCard = () => {
-  const history = useHistory();
-  const { location: { pathname } } = history;
+  // const { location: { pathname } } = history;
+
+  // https://www.themealdb.com/images/ingredients/{card.name}-Small.png
+
+  // bobejto.filter((card)=> card.idcard >=12).map ((card)=> )
+
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    const fetchIngredient = async () => {
+      const data = await fetchIngredients();
+      setIngredients(data);
+    };
+    fetchIngredient();
+  }, []);
 
   return (
-    <div>
-      {pathname === '/explore/foods/ingredients' && (
-        <section data-testid={ `${index}-ingredient-card` }>
-          <img
-            data-testid={ `${index}-card-img` }
-            svg={ meals.strMealsThumb }
-            alt="comida"
-          />
-          <h3 data-testid={ `${index}-card-name` }>{meals.strMeal}</h3>
-        </section>
-      )}
-      {pathname === '/explore/drinks/ingredients' && (
-        <section data-testid={ `${index}-ingredient-card` }>
-          <img
-            data-testid={ `${index}-card-img` }
-            svg={ drinks.strDrinkThumb }
-            alt="bebida"
-          />
-          <h3 data-testid={ `${index}-card-name` }>{drinks.strDrink}</h3>
-        </section>
-      )}
 
+    <div>
+      {
+        ingredients.length && ingredients.map((card, index) => (
+          <section key={ index } data-testid={ `${card.idIngredient}-ingredient-card` }>
+            <img
+              data-testid={ `${card.idIngredient}-card-img` }
+              alt="imagem"
+              svg="https://img.freepik.com/fotos-gratis/imagem-aproximada-em-tons-de-cinza-de-uma-aguia-careca-americana-em-um-fundo-escuro_181624-31795.jpg?w=740&t=st=1656011452~exp=1656012052~hmac=fc636b8eb98ba16cf9b874d3fe2a5c869df1436094d6ff2b3d6e1eb471729609"
+            />
+            <h3 data-testid={ `${card.strIngredient}-card-name` }>
+              {card.strIngredient}
+            </h3>
+          </section>
+        ))
+      }
     </div>
   );
 };
