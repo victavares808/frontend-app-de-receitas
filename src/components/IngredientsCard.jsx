@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import FoodsDrinksContext from '../context/FoodsDrinksContext';
 
 const IngredientsCard = () => {
   const history = useHistory();
   const { location: { pathname } } = history;
-  const { meals, drinks } = useContext(FoodsDrinksContext);
 
   return (
     <div>
