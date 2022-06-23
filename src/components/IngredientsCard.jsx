@@ -10,6 +10,7 @@ const IngredientsCard = () => {
   // bobejto.filter((card)=> card.idcard >=12).map ((card)=> )
 
   const [ingredients, setIngredients] = useState([]);
+  const MAX_INDEX = 12;
 
   useEffect(() => {
     const fetchIngredient = async () => {
@@ -23,18 +24,19 @@ const IngredientsCard = () => {
 
     <div>
       {
-        ingredients.length && ingredients.map((card, index) => (
-          <section key={ index } data-testid={ `${card.idIngredient}-ingredient-card` }>
-            <img
-              data-testid={ `${card.idIngredient}-card-img` }
-              alt={ card.strIngredient }
-              src={ `https://www.themealdb.com/images/ingredients/${card.strIngredient}-Small.png` }
-            />
-            <h3 data-testid={ `${card.strIngredient}-card-name` }>
-              {card.strIngredient}
-            </h3>
-          </section>
-        ))
+        ingredients.length && ingredients.filter((card) => card.idIngredient <= MAX_INDEX)
+          .map((card, index) => (
+            <section key={ index } data-testid={ `${card.idIngredient}-ingredient-card` }>
+              <img
+                data-testid={ `${card.idIngredient}-card-img` }
+                alt={ card.strIngredient }
+                src={ `https://www.themealdb.com/images/ingredients/${card.strIngredient}-Small.png` }
+              />
+              <h3 data-testid={ `${card.strIngredient}-card-name` }>
+                {card.strIngredient}
+              </h3>
+            </section>
+          ))
       }
     </div>
   );
