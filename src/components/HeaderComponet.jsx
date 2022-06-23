@@ -1,5 +1,5 @@
 import React from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import imageProfile from '../images/profileIcon.svg';
 import SearchBtn from './SearchBtn';
@@ -30,7 +30,7 @@ const HeaderComponent = ({ pageTitle }) => {
 };
 
 HeaderComponent.propTypes = {
-  pageTitle: propTypes.string,
+  pageTitle: PropTypes.string,
 }.isRequired;
 
 export default HeaderComponent;

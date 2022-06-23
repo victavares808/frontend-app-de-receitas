@@ -33,23 +33,18 @@ const FoodsDrinksProvider = ({ children }) => {
     const fetchApi = async ({ filterType, searchBar }) => {
       if (pageType === 'foods' && filterType === 'ingridient') {
         const ingridient = await fetchFoodsByIngridient(searchBar);
-        return (
-          setMeals(ingridient),
-          setFilter({})
-        );
+        return setMeals(ingridient);
       }
       if (pageType === 'foods' && filterType === 'name') {
         const name = await fetchFoodsByName(searchBar);
-        return (
-          setMeals(name),
-          setFilter({})
-        );
+        return setMeals(name);
       }
       if (pageType === 'foods' && filterType === 'firstLetter') {
+        if (searchBar.length !== 1) {
+          return global.alert('Your search must have only 1 (one) character');
+        }
         const firstLetter = await fetchFoodsByFirstLetter(searchBar);
-        return (
-          setMeals(firstLetter),
-          setFilter({}));
+        return setMeals(firstLetter);
       }
     };
     fetchApi(filter);
@@ -59,24 +54,18 @@ const FoodsDrinksProvider = ({ children }) => {
     const fetchApi = async ({ filterType, searchBar }) => {
       if (pageType === 'drinks' && filterType === 'ingridient') {
         const ingridient = await fetchDrinksByIngridient(searchBar);
-        return (
-          setDrinks(ingridient),
-          setFilter({})
-        );
+        return setDrinks(ingridient);
       }
       if (pageType === 'drinks' && filterType === 'name') {
         const name = await fetchDrinksByName(searchBar);
-        return (
-          setDrinks(name),
-          setFilter({})
-        );
+        return setDrinks(name);
       }
       if (pageType === 'drinks' && filterType === 'firstLetter') {
+        if (searchBar.length !== 1) {
+          return global.alert('Your search must have only 1 (one) character');
+        }
         const firstLetter = await fetchDrinksByFirstLetter(searchBar);
-        return (
-          setDrinks(firstLetter),
-          setFilter({})
-        );
+        return setDrinks(firstLetter);
       }
     };
     fetchApi(filter);
@@ -104,6 +93,7 @@ const FoodsDrinksProvider = ({ children }) => {
 
   const handlePageType = (value) => {
     setPageType(value);
+    setFilter({});
   };
 
   const contextValue = {

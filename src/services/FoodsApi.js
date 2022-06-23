@@ -23,12 +23,9 @@ export const fetchFoodsByName = async (value) => {
 export const fetchFoodsByFirstLetter = async (value) => {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${value}`;
   try {
-    if (value.length === 1) {
-      const response = await fetch(url);
-      const { meals } = await response.json();
-      return meals;
-    }
-    return global.alert('Your search must have only 1 (one) character');
+    const response = await fetch(url);
+    const { meals } = await response.json();
+    return meals;
   } catch (err) {
     console.log(err);
   }
