@@ -7,8 +7,7 @@ const ExploreNationalitiesProvider = ({ children }) => {
   const [nationalities, setNationalities] = useState([]);
   const [foods, SetFoods] = useState([]);
   const [area, setArea] = useState('American');
-  const [filterFoods, setFilterFoods] = useState([]);
-  const [isRender, setIsRender] = useState(false);
+  const [filterFoods, setFilterFoods] = useState();
   const MAX_LENGTH = 12;
 
   useEffect(() => {
@@ -16,11 +15,13 @@ const ExploreNationalitiesProvider = ({ children }) => {
       const data = await fetchAllNationalities();
       setNationalities(data);
     };
-    fetchNationalities();
+
     const fetchFoodByArea = async () => {
       const data = await fetchByArea(area);
       SetFoods(data);
     };
+
+    fetchNationalities();
     fetchFoodByArea();
   }, [area]);
 
@@ -29,7 +30,6 @@ const ExploreNationalitiesProvider = ({ children }) => {
       if (foods) {
         const data = foods.filter((_food, indexFood) => indexFood < MAX_LENGTH);
         setFilterFoods(data);
-        setIsRender(true);
       }
     };
     filter();
@@ -43,7 +43,6 @@ const ExploreNationalitiesProvider = ({ children }) => {
     nationalities,
     filterFoods,
     area,
-    isRender,
     handleArea,
   };
 

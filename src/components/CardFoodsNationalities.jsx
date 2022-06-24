@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import ExploreNationalitiesContext from '../context/ExploreNationalitiesContext';
 
-const CardFoodsNationalities = ({ place, foods }) => {
+const CardFoodsNationalities = () => {
   const {
+    nationalities,
+    filterFoods,
     area,
     handleArea,
   } = useContext(ExploreNationalitiesContext);
@@ -15,7 +17,7 @@ const CardFoodsNationalities = ({ place, foods }) => {
         onChange={ ({ target: { value } }) => handleArea(value) }
       >
         {
-          place
+          nationalities
             .map(({ strArea }, index) => (
               <option
                 key={ index }
@@ -27,7 +29,7 @@ const CardFoodsNationalities = ({ place, foods }) => {
         }
       </select>
       {
-        foods
+        filterFoods
           .map(({ strMeal, strMealThumb }, index) => (
             <button
               data-testid={ `${index}-recipe-card` }
