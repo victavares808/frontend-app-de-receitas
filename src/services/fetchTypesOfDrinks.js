@@ -10,7 +10,7 @@ export const fetchTypesOfDrinks = async () => {
 };
 
 export const fetchByCategorysDrinks = async (value) => {
-  const url = `www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`;
   try {
     const response = await fetch(url);
     const { drinks } = await response.json();

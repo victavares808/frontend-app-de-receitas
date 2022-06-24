@@ -10,7 +10,7 @@ export const fetchTypesOfFoods = async () => {
 };
 
 export const fetchByCategorysFoods = async (value) => {
-  const url = `www.themealdb.com/api/json/v1/1/filter.php?c=${value}`;
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${value}`;
   try {
     const response = await fetch(url);
     const { meals } = await response.json();
