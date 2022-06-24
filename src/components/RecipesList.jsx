@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { fetchByCategorysFoods, fetchTypesOfFoods } from '../services/FetchTypesOfFoods';
 import { fetchByCategorysDrinks, fetchTypesOfDrinks }
-from '../services/fetchTypesOfDrinks';
+  from '../services/fetchTypesOfDrinks';
 import CardFoodsOrDrinks from './CardFoodsOrDrinks';
+import { fetchInitialFood, fetchInitialDrink } from '../services/FetchInitial';
 
 const RecipesList = () => {
   const history = useHistory();
@@ -15,12 +16,29 @@ const RecipesList = () => {
   const [typeCategoryDrink, setTypeCategoryDrink] = useState('');
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [filteredDrinks, setFilteredDrinks] = useState([]);
-  const [isRender, setIsRender] = useState(false);
+  // const [initialFood, setInitalFood] = useState();
+  // const [initialDrink, setInitalDrink] = useState();
 
   console.log(filteredFoods);
 
   const MAX_INDEX = 5;
   const MAX_CARDS = 12;
+
+  useEffect(() => {
+    const fetchInitialFoods = async () => {
+      const data = await fetchInitialFood();
+      setFilteredFoods(data);
+    };
+    fetchInitialFoods();
+  }, []);
+
+  useEffect(() => {
+    const fetchInitialDrinks = async () => {
+      const data = await fetchInitialDrink();
+      setFilteredDrinks(data);
+    };
+    fetchInitialDrinks();
+  }, []);
 
   useEffect(() => {
     const fetchCategorysFoods = async () => {
@@ -64,12 +82,12 @@ const RecipesList = () => {
 
   const handleCategoryFood = ({ target: { value } }) => {
     setTypeCategoryFood(value);
-    setIsRender(true);
+    // setIsRender(true);
   };
 
   const handleCategoryDrink = ({ target: { value } }) => {
     setTypeCategoryDrink(value);
-    setIsRender(true);
+    // setIsRender(true);
   };
 
   return (
@@ -81,20 +99,25 @@ const RecipesList = () => {
               .filter((_category, indexCategory) => indexCategory < MAX_INDEX)
               .map(({ strCategory }, index) => (
                 <button
-                  key={ index }
-                  data-testid={ `${strCategory}-category-filter` }
+                  key={index}
+                  data-testid={`${strCategory}-category-filter`}
                   type="button"
-                  onClick={ handleCategoryFood }
-                  value={ strCategory }
+                  onClick={handleCategoryFood}
+                  value={strCategory}
                 >
                   {strCategory}
 
                 </button>))}
           </div>
         )}
-        {isRender && filteredFoods.map(({ strMealThumb, strMeal }, index) => (
-          <CardFoodsOrDrinks key={ index } src={ strMealThumb } name={ strMeal } />
-        )) }
+        {filteredFoods.map(({ strMealThumb, strMeal }, index) => (
+          <CardFoodsOrDrinks
+            key={index}
+            index={index}
+            src={strMealThumb}
+            name={strMeal}
+          />
+        ))}
       </div>
       <div>
         {pathname === '/drinks' && (
@@ -103,20 +126,25 @@ const RecipesList = () => {
               .filter((_category, indexCategory) => indexCategory < MAX_INDEX)
               .map((category, index) => (
                 <button
-                  key={ index }
-                  data-testid={ `${category.strCategory}-category-filter` }
+                  key={index}
+                  data-testid={`${category.strCategory}-category-filter`}
                   type="button"
-                  onClick={ handleCategoryDrink }
-                  value={ category.strCategory }
+                  onClick={handleCategoryDrink}
+                  value={category.strCategory}
                 >
                   {category.strCategory}
 
                 </button>))}
           </div>
         )}
-        {isRender && filteredDrinks.map(({ strDrinkThumb, strDrink }, index) => (
-          <CardFoodsOrDrinks key={ index } src={ strDrinkThumb } name={ strDrink } />
-        )) }
+        {filteredDrinks.map(({ strDrinkThumb, strDrink }, index) => (
+          <CardFoodsOrDrinks
+            key={index}
+            index={index}
+            src={strDrinkThumb}
+            name={strDrink}
+          />
+        ))}
       </div>
     </div>
 
