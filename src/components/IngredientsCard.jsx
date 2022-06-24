@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { fetchFoodIng, fetchDrinkIng } from '../services/fetchIngredients';
+import FoodsDrinksContext from '../context/FoodsDrinksContext';
 
 const IngredientsCard = () => {
   const history = useHistory();
@@ -8,6 +9,7 @@ const IngredientsCard = () => {
 
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
+  const { handleFilter } = useContext(FoodsDrinksContext);
   const MAX_INDEX = 12;
 
   useEffect(() => {
@@ -26,6 +28,16 @@ const IngredientsCard = () => {
     fetchDrinkIngredient();
   }, []);
 
+  const onClick = (value) => {
+    handleFilter(value, 'ingridient');
+    if (pathname === '/explore/foods/ingredients') {
+      history.push('/foods');
+    }
+    if (pathname === '/explore/drinks/ingredients') {
+      history.push('/drinks');
+    }
+  };
+
   return (
     <div>
       {pathname === '/explore/foods/ingredients' && (
@@ -34,7 +46,13 @@ const IngredientsCard = () => {
             foodIngredients.length
             && foodIngredients.filter((_card, indexCard) => indexCard < MAX_INDEX)
               .map((card, index) => (
-                <section key={ index } data-testid={ `${index}-ingredient-card` }>
+
+                <button
+                  data-testid={ `${index}-ingredient-card` }
+                  key={ index }
+                  onClick={ () => onClick(card.strIngredient) }
+                  type="button"
+                >
                   <img
                     data-testid={ `${index}-card-img` }
                     alt={ card.strIngredient }
@@ -43,7 +61,8 @@ const IngredientsCard = () => {
                   <h3 data-testid={ `${index}-card-name` }>
                     {card.strIngredient}
                   </h3>
-                </section>
+                </button>
+
               ))
           }
         </div>
@@ -54,7 +73,12 @@ const IngredientsCard = () => {
             drinkIngredients.length
             && drinkIngredients.filter((_card, indexCard) => indexCard < MAX_INDEX)
               .map((card, index) => (
-                <section key={ index } data-testid={ `${index}-ingredient-card` }>
+                <button
+                  key={ index }
+                  data-testid={ `${index}-ingredient-card` }
+                  onClick={ () => onClick(card.strIngredient1) }
+                  type="button"
+                >
                   <img
                     data-testid={ `${index}-card-img` }
                     alt={ card.strIngredient1 }
@@ -63,7 +87,7 @@ const IngredientsCard = () => {
                   <h3 data-testid={ `${index}-card-name` }>
                     {card.strIngredient1}
                   </h3>
-                </section>
+                </button>
               ))
           }
         </div>
