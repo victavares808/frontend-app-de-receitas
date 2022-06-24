@@ -37,7 +37,7 @@ const Drinks = () => {
     <div>
       <HeaderComponent pageTitle="Drinks" />
       {isSearch ? <SearchBarHeader /> : <RecipesList />}
-      { isRender && cocktail
+      {isRender && cocktail
         .map(({ strDrink, strDrinkThumb }, index) => (
           <CardFoodsOrDrinks
             key={ index }
