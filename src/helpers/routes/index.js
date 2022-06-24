@@ -28,7 +28,6 @@ class Routes extends Component {
         <Route path="/drinks/:id/in-progress" component={ ProgressDrink } />
         <Route path="/foods" component={ Foods } />
         <Route path="/drinks" component={ Drinks } />
-        <Route path="/drinks" component={ Drinks } />
         <Route path="/explore/foods/nationalities" component={ ExploreFoodsByNat } />
         <Route path="/explore/foods/ingredients" component={ ExploreFoodsByIng } />
         <Route path="/explore/foods" component={ ExploreFoods } />
