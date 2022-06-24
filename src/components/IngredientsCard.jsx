@@ -9,7 +9,7 @@ const IngredientsCard = () => {
 
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const { handleFilter } = useContext(FoodsDrinksContext);
+  const { handleFilter, handlePageType } = useContext(FoodsDrinksContext);
   const MAX_INDEX = 12;
 
   useEffect(() => {
@@ -31,9 +31,11 @@ const IngredientsCard = () => {
   const onClick = (value) => {
     handleFilter(value, 'ingridient');
     if (pathname === '/explore/foods/ingredients') {
+      handlePageType('foods');
       history.push('/foods');
     }
     if (pathname === '/explore/drinks/ingredients') {
+      handlePageType('drinks');
       history.push('/drinks');
     }
   };

@@ -93,6 +93,9 @@ const FoodsDrinksProvider = ({ children }) => {
 
   const handlePageType = (value) => {
     setPageType(value);
+  };
+
+  const clearFilter = () => {
     setFilter({});
   };
 
@@ -103,6 +106,7 @@ const FoodsDrinksProvider = ({ children }) => {
     pageType,
     handleFilter,
     handlePageType,
+    clearFilter,
   };
 
   return (
