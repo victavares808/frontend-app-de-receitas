@@ -5,6 +5,7 @@ import RecipesContext from '../context/RecipesContext';
 import SearchBarHeader from '../components/SearchBarHeader';
 import FoodsDrinksContext from '../context/FoodsDrinksContext';
 import CardFoodsOrDrinks from '../components/CardFoodsOrDrinks';
+import RecipesList from '../components/RecipesList';
 
 const Drinks = () => {
   const { isSearch } = useContext(RecipesContext);
@@ -35,8 +36,8 @@ const Drinks = () => {
   return (
     <div>
       <HeaderComponent pageTitle="Drinks" />
-      {isSearch && <SearchBarHeader />}
-      { isRender && cocktail
+      {isSearch ? <SearchBarHeader /> : <RecipesList />}
+      {isRender && cocktail
         .map(({ strDrink, strDrinkThumb }, index) => (
           <CardFoodsOrDrinks
             key={ index }
