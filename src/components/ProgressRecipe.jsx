@@ -14,7 +14,7 @@ const ProgressRecipe = ({ src, name, category, instructions, ingredients }) => (
     <h4 data-testid="recipe-category">{ category }</h4>
     <h3>Ingredients</h3>
     <p>Ingredients List</p>
-    <IngredientsList ingredients={ ingredients } />
+    {/* <IngredientsList ingredients={ ingredients } /> */}
     <p data-testid="instructions">{ instructions }</p>
     <FinishRecipe />
   </>

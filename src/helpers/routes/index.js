@@ -22,10 +22,10 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/foods/:id" component={ DetailsFood } />
-        <Route path="/drinks/:id" component={ DetailsDrink } />
         <Route path="/foods/:id/in-progress" component={ ProgressFood } />
         <Route path="/drinks/:id/in-progress" component={ ProgressDrink } />
+        <Route path="/foods/:id" component={ DetailsFood } />
+        <Route path="/drinks/:id" component={ DetailsDrink } />
         <Route path="/foods" component={ Foods } />
         <Route path="/drinks" component={ Drinks } />
         <Route path="/explore/foods/nationalities" component={ ExploreFoodsByNat } />
