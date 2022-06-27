@@ -1,7 +1,8 @@
 import React from 'react';
+import ProgressRecipe from '../components/ProgressRecipe';
 
 const ProgressFood = () => (
-  <span>Login...</span>
+  <ProgressRecipe />
 );
 
 export default ProgressFood;

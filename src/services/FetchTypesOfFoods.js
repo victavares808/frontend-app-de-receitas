@@ -3,7 +3,10 @@ export const fetchTypesOfFoods = async () => {
   try {
     const response = await fetch(url);
     const { meals } = await response.json();
-    return meals;
+    const MAX_INDEX = 5;
+    return (
+      meals.filter((_category, indexCategory) => indexCategory < MAX_INDEX)
+    );
   } catch (err) {
     console.log(err);
   }

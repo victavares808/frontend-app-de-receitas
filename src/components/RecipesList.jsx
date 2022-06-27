@@ -16,10 +16,13 @@ const RecipesList = () => {
   const [typeCategoryDrink, setTypeCategoryDrink] = useState('');
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [filteredDrinks, setFilteredDrinks] = useState([]);
+
   // const [initialFood, setInitalFood] = useState();
   // const [initialDrink, setInitalDrink] = useState();
 
   console.log(filteredFoods);
+  console.log(filteredDrinks);
+  // console.log(categorysFoods);
 
   const MAX_INDEX = 5;
   const MAX_CARDS = 12;
@@ -90,13 +93,33 @@ const RecipesList = () => {
     // setIsRender(true);
   };
 
+  const allFoods = async () => {
+    const data = await fetchInitialFood('');
+    const filteredData = data
+      .filter((_categoryFood, indexCategoryFood) => indexCategoryFood < MAX_CARDS);
+    setFilteredFoods(filteredData);
+  };
+
+  const allDrinks = async () => {
+    const data = await fetchInitialDrink('');
+    const filteredData = data
+      .filter((_categoryFood, indexCategoryFood) => indexCategoryFood < MAX_CARDS);
+    setFilteredDrinks(filteredData);
+  };
+
   return (
     <div>
       <div>
         {pathname === '/foods' && (
           <div>
+            <button
+              type="button"
+              data-testid="All-category-filter"
+              onClick={ () => allFoods() }
+            >
+              All
+            </button>
             {categorysFoods
-              .filter((_category, indexCategory) => indexCategory < MAX_INDEX)
               .map(({ strCategory }, index) => (
                 <button
                   key={ index }
@@ -109,12 +132,13 @@ const RecipesList = () => {
 
                 </button>))}
 
-            {filteredFoods.map(({ strMealThumb, strMeal }, index) => (
+            {filteredFoods.map(({ strMealThumb, strMeal, idMeal }, index) => (
               <CardFoodsOrDrinks
                 key={ index }
                 index={ index }
                 src={ strMealThumb }
                 name={ strMeal }
+                idMeal={ idMeal }
               />
             ))}
 
@@ -125,6 +149,13 @@ const RecipesList = () => {
       <div>
         {pathname === '/drinks' && (
           <div>
+            <button
+              type="button"
+              data-testid="All-category-filter"
+              onClick={ () => allDrinks() }
+            >
+              All
+            </button>
             {categorysDrinks
               .filter((_category, indexCategory) => indexCategory < MAX_INDEX)
               .map((category, index) => (
@@ -138,12 +169,13 @@ const RecipesList = () => {
                   {category.strCategory}
 
                 </button>))}
-            {filteredDrinks.map(({ strDrinkThumb, strDrink }, index) => (
+            {filteredDrinks.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
               <CardFoodsOrDrinks
                 key={ index }
                 index={ index }
                 src={ strDrinkThumb }
                 name={ strDrink }
+                idDrink={ idDrink }
               />
             ))}
 
