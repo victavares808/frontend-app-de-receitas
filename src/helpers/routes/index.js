@@ -23,7 +23,7 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/foods/:id/in-progress" component={ ProgressFood } />
-        <Route path="/drinks/:id/in-progress" component={ ProgressDrink } />
+        <Route path="/drinks/:id/in-progress" component={ ProgressFood } />
         <Route path="/foods/:id" component={ DetailsFood } />
         <Route path="/drinks/:id" component={ DetailsDrink } />
         <Route path="/foods" component={ Foods } />
