@@ -1,7 +1,8 @@
 import React from 'react';
+import ProgressRecipe from '../components/ProgressRecipe';
 
 const ProgressDrink = () => (
-  <span>Login...</span>
+  <ProgressRecipe />
 );
 
 export default ProgressDrink;
