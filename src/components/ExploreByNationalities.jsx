@@ -1,12 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
-import ExploreNationalitiesContext from '../context/ExploreNationalitiesContext';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { fetchInitialFood } from '../services/FetchInitial';
-import { fetchByArea } from '../services/NationalitiesApi';
+import { fetchAllNationalities, fetchByArea } from '../services/NationalitiesApi';
 
 const ExploreByNationalities = () => {
   const [country, setCountry] = useState('All');
   const [allFoods, setAllFoods] = useState([]);
-  const { nameArea } = useContext(ExploreNationalitiesContext);
+  const [nameArea, setNameArea] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    const fetchNat = async () => {
+      const options = await fetchAllNationalities();
+      const all = [{ strArea: 'All' }];
+      setNameArea([...all, ...options]);
+    };
+    fetchNat();
+  }, []);
 
   useEffect(() => {
     const filteredFoods = async () => {
@@ -38,6 +48,21 @@ const ExploreByNationalities = () => {
               {strArea}
             </option>))}
       </select>
+      {allFoods
+        .map(({ idMeal, strMeal, strMealThumb }, index) => (
+          <button
+            key={ index }
+            type="button"
+            data-testid={ `${index}-recipe-card` }
+            onClick={ () => history.push(`/foods/${idMeal}`) }
+          >
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `${strMealThumb}/preview` }
+              alt="Foto da Receita"
+            />
+            <span data-testid={ `${index}-card-name` }>{strMeal}</span>
+          </button>))}
     </div>
   );
 };
