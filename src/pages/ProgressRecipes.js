@@ -1,29 +1,34 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { useParams } from 'react-router-dom';
-import FinishRecipe from '../components/buttons/FinishRecipe';
-import NoFavoriteButton from '../components/buttons/NoFavoriteButton';
-import ShareIcon from '../components/buttons/ShareIcon';
+import FavoriteButton from '../components/buttons/FavoriteButton';
+// import FinishRecipe from '../components/buttons/FinishRecipe';
+import shareIcon from '../images/shareIcon.svg';
 
-const ProgressFood = () => {
+const copy = require('clipboard-copy');
+
+const ProgressRecipes = () => {
   const [recipeDetails, setRecipeDetails] = useState([]);
+  const history = useHistory();
+  const { location: { pathname } } = history;
   // const [drinkDetails, setDrinkDetails] = useState('');
   const urlCompleta = window.location.href;
-  // window.location.href returns the href (URL) of the current page.
-  const receitaComida = urlCompleta.includes('foods');
-  const receitaBebida = urlCompleta.includes('drinks');
+  const receitaComida = pathname.includes('foods');
+  const receitaBebida = pathname.includes('drinks');
   const idRecipe = useParams();
   // Aula Thalles, função do trybetunes.
+  const [disable, setDisabled] = useState(true);
+  // console.log(pathname);
+  const [hasCopy, setHasCopy] = useState(false);
 
   const fetchFoodDetail = useCallback(async () => {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
-    const { meals } = await fetch(`${URL}${idRecipe.id}`)
+    const { meals } = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idRecipe.id}`)
       .then((response) => response.json());
     setRecipeDetails(meals[0]);
   }, [idRecipe]);
 
   const fetchDrinkdDetail = useCallback(async () => {
-    const URL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-    const { drinks } = await fetch(`${URL}${idRecipe.id}`)
+    const { drinks } = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idRecipe.id}`)
       .then((response) => response.json());
     setRecipeDetails(drinks[0]);
   }, [idRecipe]);
@@ -49,8 +54,17 @@ const ProgressFood = () => {
     }
   }
 
+  const copyToClipBoard = () => {
+    copy(urlCompleta);
+    // console.log(url);
+    global.alert('Link copied!');
+    setHasCopy(true);
+  };
+
   return (
+
     <div>
+      {hasCopy && <p>Link copied!</p>}
       {recipeDetails && (
         <div>
           <img
@@ -67,25 +81,45 @@ const ProgressFood = () => {
           <h4 data-testid="recipe-category">
             { receitaComida ? recipeDetails.strCategory : recipeDetails.strAlcoholic }
           </h4>
-          <NoFavoriteButton />
-          <ShareIcon />
+          <FavoriteButton />
+          <input
+            type="image"
+            data-testid="share-btn"
+            src={ shareIcon }
+            alt="Botão de favoritar"
+            onClick={ () => copyToClipBoard() }
+          />
           <h3>Ingredients</h3>
-          {ingredients.map((ingredient) => (
+          {ingredients.map((ingredient, index) => (
             <div
-              data-testid={ `${ingredients.indexOf(ingredient)}-ingredient-step` }
-              key={ ingredients.indexOf(ingredient) }
+              data-testid={ `${index}-ingredient-step` }
+              key={ index }
             >
-              <input type="checkbox" value={ ingredient } id={ ingredient } />
+              <input
+                type="checkbox"
+                value={ ingredient }
+                id={ ingredient }
+                className="checkbox"
+              />
               <label htmlFor={ ingredient }>
                 { ingredient }
               </label>
             </div>
           ))}
           <h3>Instructions</h3>
-          <textarea data-testid="instructions">
+          <p data-testid="instructions">
             { recipeDetails.strInstructions }
-          </textarea>
-          <FinishRecipe />
+          </p>
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            onClick={ () => history.push('/done-recipes') }
+            disabled={ disable }
+
+          >
+            Finish Recipe
+
+          </button>
         </div>
       )}
 
@@ -93,4 +127,4 @@ const ProgressFood = () => {
   );
 };
 
-export default ProgressFood;
+export default ProgressRecipes;
