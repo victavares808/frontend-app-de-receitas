@@ -38,12 +38,14 @@ const Foods = () => {
       <HeaderComponent pageTitle="Foods" />
       {isSearch ? <SearchBarHeader /> : <RecipesList />}
       { isRender && foods
-        .map(({ strMeal, strMealThumb }, index) => (
+        .map(({ strMeal, strMealThumb, idMeal }, index) => (
           <CardFoodsOrDrinks
             key={ index }
             index={ index }
             src={ strMealThumb }
             name={ strMeal }
+            id={ idMeal }
+            page="foods"
           />))}
       <FooterComponent />
     </div>
