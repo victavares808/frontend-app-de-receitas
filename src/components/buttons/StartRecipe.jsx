@@ -1,13 +1,31 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
-const StartRecipe = () => (
-  <button
-    type="button"
-    data-testid="start-recipe-btn"
-    style={ { position: 'fixed', bottom: '0px' } }
-  >
-    Start Recipe
-  </button>
-);
+const StartRecipe = ({ id }) => {
+  const history = useHistory();
+  const { location: { pathname } } = history;
+  const receitaComida = pathname.includes('foods');
+  const receitaBebida = pathname.includes('drinks');
+
+  const redirect = () => {
+    if (receitaComida) {
+      history.push(`/foods/${id}/in-progress`);
+    }
+    if (receitaBebida) {
+      history.push(`/drinks/${id}/in-progress`);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      data-testid="start-recipe-btn"
+      style={ { position: 'fixed', bottom: '0px' } }
+      onClick={ () => redirect() }
+    >
+      Start Recipe
+    </button>
+  );
+};
 
 export default StartRecipe;
