@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import PropTypes from 'prop-types';
 
 const StartRecipe = ({ id }) => {
   const history = useHistory();
@@ -27,5 +28,9 @@ const StartRecipe = ({ id }) => {
     </button>
   );
 };
+
+StartRecipe.propTypes = {
+  id: PropTypes.string,
+}.isRequired;
 
 export default StartRecipe;
