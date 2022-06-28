@@ -9,8 +9,8 @@ import ExploreFoods from '../../pages/ExploreFoods';
 import ExploreFoodsByIng from '../../pages/ExploreFoodsByIng';
 import Foods from '../../pages/Foods';
 import Login from '../../pages/Login';
-import ProgressDrink from '../../pages/ProgressDrink';
-import ProgressFood from '../../pages/ProgressFood';
+// import ProgressDrink from '../../pages/ProgressDrink';
+import ProgressRecipes from '../../pages/ProgressRecipes';
 import ExploreDrinksByIng from '../../pages/ExploreDrinksByIng';
 import ExploreFoodsByNat from '../../pages/ExploreFoodsByNat';
 import Profile from '../../pages/Profile';
@@ -23,10 +23,10 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route path="/foods/:id/in-progress" component={ ProgressRecipes } />
+        <Route path="/drinks/:id/in-progress" component={ ProgressRecipes } />
         <Route path="/foods/:id" component={ DetailsFood } />
         <Route path="/drinks/:id" component={ DetailsDrink } />
-        <Route path="/foods/:id/in-progress" component={ ProgressFood } />
-        <Route path="/drinks/:id/in-progress" component={ ProgressDrink } />
         <Route path="/foods" component={ Foods } />
         <Route path="/drinks" component={ Drinks } />
         <Route path="/explore/foods/nationalities" component={ ExploreFoodsByNat } />

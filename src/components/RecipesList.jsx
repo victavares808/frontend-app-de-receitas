@@ -17,13 +17,6 @@ const RecipesList = () => {
   const [filteredFoods, setFilteredFoods] = useState([]);
   const [filteredDrinks, setFilteredDrinks] = useState([]);
 
-  // const [initialFood, setInitalFood] = useState();
-  // const [initialDrink, setInitalDrink] = useState();
-
-  console.log(filteredFoods);
-  console.log(filteredDrinks);
-  // console.log(categorysFoods);
-
   const MAX_INDEX = 5;
   const MAX_CARDS = 12;
 
@@ -85,12 +78,10 @@ const RecipesList = () => {
 
   const handleCategoryFood = ({ target: { value } }) => {
     setTypeCategoryFood(value);
-    // setIsRender(true);
   };
 
   const handleCategoryDrink = ({ target: { value } }) => {
     setTypeCategoryDrink(value);
-    // setIsRender(true);
   };
 
   const allFoods = async () => {
@@ -138,7 +129,8 @@ const RecipesList = () => {
                 index={ index }
                 src={ strMealThumb }
                 name={ strMeal }
-                idMeal={ idMeal }
+                id={ idMeal }
+                page="foods"
               />
             ))}
 
@@ -175,7 +167,8 @@ const RecipesList = () => {
                 index={ index }
                 src={ strDrinkThumb }
                 name={ strDrink }
-                idDrink={ idDrink }
+                id={ idDrink }
+                page="drinks"
               />
             ))}
 

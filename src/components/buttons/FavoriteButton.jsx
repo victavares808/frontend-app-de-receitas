@@ -1,12 +1,12 @@
 import React from 'react';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 const FavoriteButton = () => (
-  <button
-    type="button"
+  <input
+    type="image"
     data-testid="favorite-btn"
-    src={ blackHeartIcon }
-    alt="Botão de favorito"
+    src={ whiteHeartIcon }
+    alt="Botão de favoritar"
   />
 );
 
