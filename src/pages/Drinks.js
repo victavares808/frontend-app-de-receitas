@@ -19,6 +19,7 @@ const Drinks = () => {
   const [categorysDrinks, setCategorysDrinks] = useState([]);
   const [typeCategoryDrink, setTypeCategoryDrink] = useState('');
   const [filteredDrinks, setFilteredDrinks] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   const MAX_CARDS = 12;
 
@@ -40,15 +41,19 @@ const Drinks = () => {
 
   useEffect(() => {
     const fetchCategoryDrinks = async () => {
-      if (typeCategoryDrink) {
+      if (toggle) {
         const data = await fetchByCategorysDrinks(typeCategoryDrink);
         const filteredData = data
           .filter((_categoryDrink, indexCategoryDrink) => indexCategoryDrink < MAX_CARDS);
         setFilteredDrinks(filteredData);
       }
+      if (!toggle) {
+        const data1 = await fetchInitialDrink();
+        setFilteredDrinks(data1);
+      }
     };
     fetchCategoryDrinks();
-  }, [typeCategoryDrink]);
+  }, [typeCategoryDrink, toggle]);
 
   useEffect(() => {
     const verifyMeals = () => {
@@ -77,7 +82,14 @@ const Drinks = () => {
   };
 
   const handleCategoryDrink = (value) => {
+    if (typeCategoryDrink === value) {
+      return (
+        setTypeCategoryDrink(value),
+        setToggle(!toggle)
+      );
+    }
     setTypeCategoryDrink(value);
+    setToggle(true);
   };
 
   return (
