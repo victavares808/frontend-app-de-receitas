@@ -17,7 +17,7 @@ const ProgressRecipes = () => {
   const receitaBebida = pathname.includes('drinks');
   const idRecipe = useParams();
   // Aula Thalles, função do trybetunes.
-  // console.log(pathname);
+  console.log(pathname);
   const [hasCopy, setHasCopy] = useState(false);
 
   const fetchFoodDetail = useCallback(async () => {
@@ -54,8 +54,11 @@ const ProgressRecipes = () => {
   }
 
   const copyToClipBoard = () => {
-    copy(urlCompleta);
-    // console.log(url);
+    // const trintaecinco = 35;
+    // const urlSemProgress = urlCompleta.slice(0, trintaecinco);
+    const urlSemProgress = urlCompleta.replace('/in-progress', '');
+    copy(urlSemProgress);
+    // console.log(urlSemProgress);
     global.alert('Link copied!');
     setHasCopy(true);
   };
