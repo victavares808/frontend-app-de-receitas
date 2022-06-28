@@ -113,7 +113,6 @@ const ProgressRecipes = () => {
             type="button"
             data-testid="finish-recipe-btn"
             onClick={ () => history.push('/done-recipes') }
-            disabled={ disable }
 
           >
             Finish Recipe
