@@ -2,7 +2,6 @@ import React, { useState, set } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
-
 const CardFoodsOrDrinks = ({ index, src, name, idMeal, idDrink }) => {
   const history = useHistory();
   const { location: { pathname } } = history;

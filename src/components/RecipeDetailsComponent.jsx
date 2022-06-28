@@ -5,13 +5,13 @@ import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
 
 const RecipeDetailsComponent = ({
-  srcImage, srcVideo, recipeName, recipeCategory, recipeText,
+  srcImage, srcVideo, recipeName, recipeCategory, recipeText, ingredients,
 }) => (
 
   <>
     <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
     <h2 data-testid="recipe-title">
-      { recipeName }
+      {recipeName}
     </h2>
     <h4 data-testid="recipe-category">
       {recipeCategory}
@@ -19,10 +19,16 @@ const RecipeDetailsComponent = ({
     <ShareIcon />
     <FavoriteButton />
     <h3>Ingredients</h3>
-    {/* <li data-testid={ `${index}-ingredient-name-and-measure` } /> */}
+    <ul data-testid="recipe-ingredients">
+      {ingredients.map((ingredient, index) => (
+        <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+          {`${ingredient.name} - ${ingredient.measure}`}
+        </li>
+      ))}
+    </ul>
     <h3>Instructions</h3>
     <p data-testid="instructions">
-      { recipeText }
+      {recipeText}
     </p>
     <h3>Video</h3>
     <track data-testid="videos" src={ srcVideo } />
