@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FavoriteButton from './buttons/NoFavoriteButton';
+import FavoriteButton from './buttons/FavoriteButton';
 import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
 
