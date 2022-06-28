@@ -3,7 +3,10 @@ export const fetchTypesOfDrinks = async () => {
   try {
     const response = await fetch(url);
     const { drinks } = await response.json();
-    return drinks;
+    const MAX_INDEX = 5;
+    return (
+      drinks.filter((_category, indexCategory) => indexCategory < MAX_INDEX)
+    );
   } catch (err) {
     console.log(err);
   }

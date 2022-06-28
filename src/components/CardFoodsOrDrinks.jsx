@@ -28,6 +28,8 @@ CardFoodsOrDrinks.propTypes = {
   index: PropTypes.string,
   src: PropTypes.string,
   name: PropTypes.string,
+  id: PropTypes.string,
+  page: PropTypes.string,
 }.isRequired;
 
 export default CardFoodsOrDrinks;
