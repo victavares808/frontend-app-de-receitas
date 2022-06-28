@@ -1,4 +1,4 @@
-import React, { useState, set } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 

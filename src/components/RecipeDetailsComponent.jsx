@@ -5,37 +5,68 @@ import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
 
 const RecipeDetailsComponent = ({
-  srcImage, srcVideo, recipeName, recipeCategory, recipeText, ingredients,
-}) => (
+  srcImage, srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended,
+}) => {
+  const video = () => (
+    <div>
+      <h3>Video</h3>
+      <video
+        data-testid="video"
+        poster={ srcImage }
+      >
+        <source src={ srcVideo } />
+        <track kind="captions" />
+      </video>
+    </div>
+  );
 
-  <>
-    <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
-    <h2 data-testid="recipe-title">
-      {recipeName}
-    </h2>
-    <h4 data-testid="recipe-category">
-      {recipeCategory}
-    </h4>
-    <ShareIcon />
-    <FavoriteButton />
-    <h3>Ingredients</h3>
-    <ul data-testid="recipe-ingredients">
-      {ingredients.map((ingredient, index) => (
-        <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-          {`${ingredient.name} - ${ingredient.measure}`}
-        </li>
-      ))}
-    </ul>
-    <h3>Instructions</h3>
-    <p data-testid="instructions">
-      {recipeText}
-    </p>
-    <h3>Video</h3>
-    <track data-testid="videos" src={ srcVideo } />
-    {/*   <h3 data-testid={ `${index}-recomendation-card` }>Recommended</h3> */}
-    <StartRecipe />
-  </>
-);
+  return (
+    <main>
+      <section>
+        <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
+        <h2 data-testid="recipe-title">
+          {recipeName}
+        </h2>
+        <h4 data-testid="recipe-category">
+          {recipeCategory}
+        </h4>
+        <ShareIcon />
+        <FavoriteButton />
+      </section>
+      <section>
+        <h3>Ingredients</h3>
+        <ul data-testid="recipe-ingredients">
+          {ingredients.map((ingredient, index) => (
+            <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
+              {`${ingredient.name} - ${ingredient.measure}`}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h3>Instructions</h3>
+        <p data-testid="instructions">
+          {recipeText}
+        </p>
+      </section>
+      <section>
+        {srcVideo && video()}
+      </section>
+      <section>
+        <h3>Recommended</h3>
+        {recommended.map(({ name, img, type }, index) => (
+          <div key={ index } data-testid={ `${index}-recomendation-card` }>
+            <img src={ `${img}/preview` } alt="foto da receita recomendada" />
+            <h6>{type}</h6>
+            <h4 data-testid={ `${index}-recomendation-title` }>{name}</h4>
+          </div>))}
+      </section>
+      <section>
+        <StartRecipe />
+      </section>
+    </main>
+  );
+};
 
 RecipeDetailsComponent.propTypes = {
   srcImage: PropTypes.string,

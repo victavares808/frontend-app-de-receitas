@@ -4,8 +4,25 @@ import RecipeDetailsComponent from '../components/RecipeDetailsComponent';
 
 const DetailsFood = () => {
   const [foods, setFoods] = useState([]);
+  const [recommended, setRecommended] = useState([]);
   // const [ingredientObject, setIngredientObject] = useState({});
   const { id } = useParams();
+
+  useEffect(() => {
+    const MAX_INDEX = 6;
+    const fectRecommended = async () => {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const { drinks } = await response.json();
+      const filterDrinks = drinks.filter((_drink, idDrink) => idDrink < MAX_INDEX)
+        .map(({ strDrink, strDrinkThumb, strAlcoholic }) => ({
+          name: strDrink,
+          img: strDrinkThumb,
+          type: strAlcoholic,
+        }));
+      return setRecommended(filterDrinks);
+    };
+    fectRecommended();
+  }, []);
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -15,7 +32,6 @@ const DetailsFood = () => {
     };
     initialFetch();
   }, [id]);
-  console.log(foods);
 
   const isKeyValid = (food, key) => {
     const value = food[key];
@@ -43,10 +59,18 @@ const DetailsFood = () => {
     return buildIngredientObjects(food, validNameKeys, validMeasureKeys);
   };
 
-  const { strMeal, strMealThumb, strCategory, strInstructions } = foods;
+  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = foods;
 
   const ingredients = getIngredients(foods);
   // setIngredientObject(foods);
+
+  const replaceStrYoutube = (str) => {
+    if (str) {
+      return str.replace('watch?v', 'embed/');
+    }
+  };
+
+  const newStrYoutube = replaceStrYoutube(strYoutube);
 
   return (
     <RecipeDetailsComponent
@@ -55,6 +79,8 @@ const DetailsFood = () => {
       recipeCategory={ strCategory }
       recipeText={ strInstructions }
       ingredients={ ingredients }
+      srcVideo={ newStrYoutube }
+      recommended={ recommended }
     />
   );
 };
