@@ -17,7 +17,6 @@ const ProgressRecipes = () => {
   const receitaBebida = pathname.includes('drinks');
   const idRecipe = useParams();
   // Aula Thalles, função do trybetunes.
-  const [disable, setDisabled] = useState(true);
   // console.log(pathname);
   const [hasCopy, setHasCopy] = useState(false);
 
