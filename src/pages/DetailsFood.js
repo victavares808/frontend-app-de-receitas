@@ -27,13 +27,12 @@ const DetailsFood = () => {
   const getTargetKeys = (food, target) => Object.keys(food)
     .filter((key) => key.startsWith(target));
 
-  const buildIngredientObjects = (food, nameKeys, measureKeys) => {
-    return nameKeys.map((keyName, index) => {
-      const measure = food[measureKeys[index]]
-      const name = food[keyName]
-      return { name, measure }
-    })
-  };
+  const buildIngredientObjects = (food, nameKeys, measureKeys) => nameKeys
+    .map((keyName, index) => {
+      const measure = food[measureKeys[index]];
+      const name = food[keyName];
+      return { name, measure };
+    });
 
   const getIngredients = (food) => {
     const validNameKeys = getTargetKeys(food, 'strIngredient')
@@ -51,11 +50,11 @@ const DetailsFood = () => {
 
   return (
     <RecipeDetailsComponent
-      srcImage={`${strMealThumb}/preview`}
-      recipeName={strMeal}
-      recipeCategory={strCategory}
-      recipeText={strInstructions}
-      ingredients={ingredients}
+      srcImage={ `${strMealThumb}/preview` }
+      recipeName={ strMeal }
+      recipeCategory={ strCategory }
+      recipeText={ strInstructions }
+      ingredients={ ingredients }
     />
   );
 };
