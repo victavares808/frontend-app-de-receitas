@@ -16,6 +16,7 @@ import ExploreFoodsByNat from '../../pages/ExploreFoodsByNat';
 import Profile from '../../pages/Profile';
 import DoneRecipes from '../../pages/DoneRecipes';
 import FavoriteRacipes from '../../pages/FavoriteRacipes';
+import ExploreDrinksByNat from '../../pages/ExploreDrinksByNat';
 
 class Routes extends Component {
   render() {
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route path="/explore/foods/nationalities" component={ ExploreFoodsByNat } />
         <Route path="/explore/foods/ingredients" component={ ExploreFoodsByIng } />
         <Route path="/explore/foods" component={ ExploreFoods } />
+        <Route path="/explore/drinks/nationalities" component={ ExploreDrinksByNat } />
         <Route path="/explore/drinks/ingredients" component={ ExploreDrinksByIng } />
         <Route path="/explore/drinks" component={ ExploreDrinks } />
         <Route path="/explore" component={ Explore } />
