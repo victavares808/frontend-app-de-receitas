@@ -60,7 +60,9 @@ const DetailsFood = () => {
     return buildIngredientObjects(food, validNameKeys, validMeasureKeys);
   };
 
-  const { strMeal, strMealThumb, strCategory, strInstructions, strYoutube } = foods;
+  const { strMeal, strMealThumb, strCategory,
+    strInstructions, strYoutube, strArea } = foods;
+  console.log(foods);
 
   const ingredients = getIngredients(foods);
   // setIngredientObject(foods);
@@ -75,7 +77,7 @@ const DetailsFood = () => {
 
   return (
     <RecipeDetailsComponent
-      srcImage={ `${strMealThumb}/preview` }
+      srcImage={ `${strMealThumb}` }
       recipeName={ strMeal }
       recipeCategory={ strCategory }
       recipeText={ strInstructions }
@@ -84,6 +86,10 @@ const DetailsFood = () => {
       recommended={ recommended }
       id={ id }
       page="foods"
+      area={ strArea }
+      alcoholic=""
+      isType="food"
+      category={ strCategory }
     />
   );
 };

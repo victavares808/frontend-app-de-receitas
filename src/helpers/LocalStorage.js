@@ -58,5 +58,6 @@ export const favoriteRecipe = (recipes) => {
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favorite, recipes]));
   } else {
     localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+    console.log(recipes, 'esse aquiiii');
   }
 };

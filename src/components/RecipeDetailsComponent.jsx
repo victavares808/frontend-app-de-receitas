@@ -7,7 +7,12 @@ import { inProgressRecipes } from '../helpers/LocalStorage';
 
 const RecipeDetailsComponent = ({
   srcImage,
-  srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended, id, page,
+  srcVideo,
+  recipeName,
+  recipeCategory,
+  recipeText, ingredients,
+  recommended,
+  id, page, area, alcoholic, isType, category,
 }) => {
   const INITIAL_STATE = {
     id: '',
@@ -22,7 +27,19 @@ const RecipeDetailsComponent = ({
   const [favorites, setFavorites] = useState(INITIAL_STATE);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  console.log(setFavorites, 'tirar daqui a pouco');
+
+  useEffect(() => {
+    const finalState = {
+      id,
+      type: isType,
+      nationality: area,
+      category,
+      alcoholicOrNot: alcoholic,
+      name: recipeName,
+      image: srcImage,
+    };
+    setFavorites(finalState);
+  }, [id, page, area, recipeCategory, alcoholic, recipeName, srcImage, isType, category]);
 
   useEffect(() => {
     const getLocalStorage = () => {
@@ -55,7 +72,7 @@ const RecipeDetailsComponent = ({
       <h3>Video</h3>
       <video
         data-testid="video"
-        poster={ srcImage }
+        poster={ `${srcImage}/preview` }
       >
         <source src={ srcVideo } />
         <track kind="captions" />
@@ -66,7 +83,11 @@ const RecipeDetailsComponent = ({
   return (
     <main>
       <section>
-        <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
+        <img
+          data-testid="recipe-photo"
+          src={ `${srcImage}/preview` }
+          alt="imagem da receita"
+        />
         <h2 data-testid="recipe-title">
           {recipeName}
         </h2>

@@ -59,12 +59,14 @@ const DetailsDrink = () => {
   };
 
   const ingredients = getIngredients(cocktails);
+  console.log(cocktails);
 
-  const { strDrink, strDrinkThumb, strAlcoholic, strInstructions } = cocktails;
+  const { strDrink, strDrinkThumb,
+    strAlcoholic, strInstructions, strCategory } = cocktails;
 
   return (
     <RecipeDetailsComponent
-      srcImage={ `${strDrinkThumb}/preview` }
+      srcImage={ `${strDrinkThumb}` }
       recipeName={ strDrink }
       recipeCategory={ strAlcoholic }
       recipeText={ strInstructions }
@@ -73,6 +75,10 @@ const DetailsDrink = () => {
       recommended={ recommended }
       id={ id }
       page="drinks"
+      area=""
+      alcoholic={ strAlcoholic }
+      isType="drink"
+      category={ strCategory }
     />
   );
 };
