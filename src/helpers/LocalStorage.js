@@ -51,3 +51,12 @@ export const inProgressRecipes = (id, listIngredient, type) => {
     }
   }
 };
+
+export const favoriteRecipe = (recipes) => {
+  if (localStorage.getItem('favoriteRecipes')) {
+    const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favorite, recipes]));
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([recipes]));
+  }
+};
