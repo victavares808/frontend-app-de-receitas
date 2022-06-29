@@ -55,12 +55,22 @@ const RecipeDetailsComponent = ({
       </section>
       <section>
         <h3>Recommended</h3>
-        {recommended.map(({ name, img, type }, index) => (
-          <div key={ index } data-testid={ `${index}-recomendation-card` }>
-            <img src={ `${img}/preview` } alt="foto da receita recomendada" />
-            <h6>{type}</h6>
-            <h4 data-testid={ `${index}-recomendation-title` }>{name}</h4>
-          </div>))}
+        <div
+          style={ {
+            display: 'flex',
+            flexWrap: 'wrap',
+            width: '500px',
+            height: '230px',
+            overflow: 'hidden',
+            overflowY: 'auto' } }
+        >
+          {recommended.map(({ name, img, type }, index) => (
+            <div key={ index } data-testid={ `${index}-recomendation-card` }>
+              <img src={ `${img}/preview` } alt="foto da receita recomendada" />
+              <h6>{type}</h6>
+              <h4 data-testid={ `${index}-recomendation-title` }>{name}</h4>
+            </div>))}
+        </div>
       </section>
       <section>
         <StartRecipe id={ id } />
