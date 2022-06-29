@@ -8,9 +8,10 @@ const StartRecipe = ({ id, page, storage }) => {
 
   useEffect(() => {
     const getStorage = () => {
-      if (JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+      console.log('entrou');
+      if (localStorage.getItem('inProgressRecipes')) {
         const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes'));
-        const { meals, cocktails } = inProgressObj;
+        const { meals = {}, cocktails = {} } = inProgressObj;
         const verifyKeysMeals = Object.keys(meals).some((key) => key === id);
         const verifyKeysCocktails = Object.keys(cocktails).some((key) => key === id);
         if (page === 'foods') {

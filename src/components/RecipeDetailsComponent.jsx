@@ -13,7 +13,7 @@ const RecipeDetailsComponent = ({
 
   useEffect(() => {
     const getLocalStorage = () => {
-      if (JSON.parse(localStorage.getItem('doneRecipes'))) {
+      if (localStorage.getItem('doneRecipes')) {
         const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
         const verify = doneRecipeStorage.some((recipe) => recipe.id === id);
         setIsDone(verify);

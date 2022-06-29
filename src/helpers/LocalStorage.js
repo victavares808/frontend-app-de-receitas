@@ -11,7 +11,7 @@ export const userEmailToLocalStorage = (value) => {
 };
 
 export const doneRecipe = (recipes) => {
-  if (JSON.parse(localStorage.getItem('doneRecipes'))) {
+  if (localStorage.getItem('doneRecipes')) {
     const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
     localStorage.setItem('doneRecipes', JSON.stringify([...doneRecipeStorage, recipes]));
   } else {
@@ -20,7 +20,7 @@ export const doneRecipe = (recipes) => {
 };
 
 export const inProgressRecipes = (id, listIngredient, type) => {
-  if (JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+  if (localStorage.getItem('inProgressRecipes')) {
     const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const { meals, cocktails } = inProgressObj;
     if (type === 'foods') {
