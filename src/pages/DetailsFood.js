@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import RecipeDetailsComponent from '../components/RecipeDetailsComponent';
+import StartRecipe from '../components/buttons/StartRecipe';
 
 const DetailsFood = () => {
   const [foods, setFoods] = useState([]);
   // const [ingredientObject, setIngredientObject] = useState({});
+  const [recipeIsDone, setRecipeIsDone] = useState(false);
   const { id } = useParams();
+
+  function doneRecipe() {
+    const doneRecipesJson = localStorage.getItem('doneRecipes');
+    if (doneRecipesJson) {
+      const doneRecipesObj = JSON.parse(doneRecipesJson);
+      doneRecipesObj.forEach((value) => {
+        if (value.idMeal === recipe[0].idMeal) {
+          setRecipeIsDone(true);
+        }
+      });
+    }
+  }
+
+  useEffect(() => {
+    doneRecipe();
+  }, []);
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -49,13 +67,20 @@ const DetailsFood = () => {
   // setIngredientObject(foods);
 
   return (
-    <RecipeDetailsComponent
-      srcImage={ `${strMealThumb}/preview` }
-      recipeName={ strMeal }
-      recipeCategory={ strCategory }
-      recipeText={ strInstructions }
-      ingredients={ ingredients }
-    />
+    <main>
+      <RecipeDetailsComponent
+        srcImage={ `${strMealThumb}/preview` }
+        recipeName={ strMeal }
+        recipeCategory={ strCategory }
+        recipeText={ strInstructions }
+        ingredients={ ingredients }
+      />
+      <StartRecipe
+        recipeIsDone={ recipeIsDone }
+        id={ id }
+        page="meals"
+      />
+    </main>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FavoriteButton from './buttons/NoFavoriteButton';
 import ShareIcon from './buttons/ShareIcon';
@@ -7,7 +7,6 @@ import StartRecipe from './buttons/StartRecipe';
 const RecipeDetailsComponent = ({
   srcImage, srcVideo, recipeName, recipeCategory, recipeText, ingredients,
 }) => (
-
   <>
     <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
     <h2 data-testid="recipe-title">
