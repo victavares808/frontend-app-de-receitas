@@ -18,3 +18,36 @@ export const doneRecipe = (recipes) => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipes]));
   }
 };
+
+export const inProgressRecipes = (id, listIngredient, type) => {
+  if (JSON.parse(localStorage.getItem('inProgressRecipes'))) {
+    const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { meals, cocktails } = inProgressObj;
+    if (type === 'foods') {
+      inProgressObj.meals = { ...meals, [id]: listIngredient };
+    }
+    if (type === 'drinks') {
+      inProgressObj.cocktails = { ...cocktails, [id]: listIngredient };
+    }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressObj));
+  } else {
+    if (type === 'foods') {
+      const obj = {
+        cocktails: {},
+        meals: {
+          [id]: listIngredient,
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
+    }
+    if (type === 'drinks') {
+      const obj = {
+        cocktails: {
+          [id]: listIngredient,
+        },
+        meals: {},
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
+    }
+  }
+};

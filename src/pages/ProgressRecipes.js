@@ -77,6 +77,8 @@ const ProgressRecipes = () => {
     doneRecipe(recipe);
   };
 
+  console.log(setRecipe); // tirar assim que arrumar função pro setRecipe
+
   return (
 
     <div>

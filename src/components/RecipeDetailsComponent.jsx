@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FavoriteButton from './buttons/FavoriteButton';
 import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
+import { inProgressRecipes } from '../helpers/LocalStorage';
 
 const RecipeDetailsComponent = ({
   srcImage,
@@ -20,6 +21,10 @@ const RecipeDetailsComponent = ({
     };
     getLocalStorage();
   }, [id]);
+
+  const progressRecipeStorage = () => {
+    inProgressRecipes(id, ingredients, page);
+  };
 
   const video = () => (
     <div>
@@ -86,7 +91,12 @@ const RecipeDetailsComponent = ({
         </div>
       </section>
       <section>
-        {!isDone && <StartRecipe id={ id } page={ page } />}
+        {!isDone
+        && <StartRecipe
+          id={ id }
+          page={ page }
+          storage={ progressRecipeStorage }
+        />}
       </section>
     </main>
   );
