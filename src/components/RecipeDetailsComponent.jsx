@@ -5,7 +5,8 @@ import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
 
 const RecipeDetailsComponent = ({
-  srcImage, srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended,
+  srcImage,
+  srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended, id,
 }) => {
   const video = () => (
     <div>
@@ -72,7 +73,7 @@ const RecipeDetailsComponent = ({
         </div>
       </section>
       <section>
-        <StartRecipe />
+        <StartRecipe id={ id } />
       </section>
     </main>
   );

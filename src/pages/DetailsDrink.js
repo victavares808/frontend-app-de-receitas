@@ -71,6 +71,7 @@ const DetailsDrink = () => {
       ingredients={ ingredients }
       srcVideo={ null }
       recommended={ recommended }
+      id={ id }
     />
   );
 };
