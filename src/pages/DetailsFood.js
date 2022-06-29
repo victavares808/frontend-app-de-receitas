@@ -25,22 +25,6 @@ const DetailsFood = () => {
     fectRecommended();
   }, []);
 
-  function doneRecipe() {
-    const doneRecipesJson = localStorage.getItem('doneRecipes');
-    if (doneRecipesJson) {
-      const doneRecipesObj = JSON.parse(doneRecipesJson);
-      doneRecipesObj.forEach((value) => {
-        if (value.idMeal === recipe[0].idMeal) {
-          setRecipeIsDone(true);
-        }
-      });
-    }
-  }
-
-  useEffect(() => {
-    doneRecipe();
-  }, []);
-
   useEffect(() => {
     const initialFetch = async () => {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -99,6 +83,7 @@ const DetailsFood = () => {
       srcVideo={ newStrYoutube }
       recommended={ recommended }
       id={ id }
+      page="foods"
     />
   );
 };

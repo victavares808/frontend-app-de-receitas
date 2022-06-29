@@ -4,19 +4,31 @@ import { useParams } from 'react-router-dom';
 import FavoriteButton from '../components/buttons/FavoriteButton';
 // import FinishRecipe from '../components/buttons/FinishRecipe';
 import shareIcon from '../images/shareIcon.svg';
+import { doneRecipe } from '../helpers/LocalStorage';
 
 const copy = require('clipboard-copy');
 
 const ProgressRecipes = () => {
+  const INITIAL_STATE = {
+    id: '',
+    type: '',
+    nationality: '',
+    category: '',
+    alcoholicOrNot: '',
+    name: '',
+    image: '',
+    doneDate: '',
+    tags: '',
+  };
+
+  const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recipeDetails, setRecipeDetails] = useState([]);
   const history = useHistory();
   const { location: { pathname } } = history;
-  // const [drinkDetails, setDrinkDetails] = useState('');
   const urlCompleta = window.location.href;
   const receitaComida = pathname.includes('foods');
   const receitaBebida = pathname.includes('drinks');
   const idRecipe = useParams();
-  // Aula Thalles, função do trybetunes.
   console.log(pathname);
   const [hasCopy, setHasCopy] = useState(false);
 
@@ -54,13 +66,15 @@ const ProgressRecipes = () => {
   }
 
   const copyToClipBoard = () => {
-    // const trintaecinco = 35;
-    // const urlSemProgress = urlCompleta.slice(0, trintaecinco);
     const urlSemProgress = urlCompleta.replace('/in-progress', '');
     copy(urlSemProgress);
-    // console.log(urlSemProgress);
     global.alert('Link copied!');
     setHasCopy(true);
+  };
+
+  const onClick = () => {
+    history.push('/done-recipes');
+    doneRecipe(recipe);
   };
 
   return (
@@ -115,7 +129,7 @@ const ProgressRecipes = () => {
           <button
             type="button"
             data-testid="finish-recipe-btn"
-            onClick={ () => history.push('/done-recipes') }
+            onClick={ () => onClick() }
 
           >
             Finish Recipe
