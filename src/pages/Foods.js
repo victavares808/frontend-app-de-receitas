@@ -17,6 +17,7 @@ const Foods = () => {
   const [categorysFoods, setCategorysFoods] = useState([]);
   const [typeCategoryFood, setTypeCategoryFood] = useState('');
   const [filteredFoods, setFilteredFoods] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   const MAX_CARDS = 12;
 
@@ -38,15 +39,19 @@ const Foods = () => {
 
   useEffect(() => {
     const fetchCategoryFood = async () => {
-      if (typeCategoryFood) {
+      if (toggle) {
         const data = await fetchByCategorysFoods(typeCategoryFood);
         const filteredData = data
           .filter((_categoryFood, indexCategoryFood) => indexCategoryFood < MAX_CARDS);
         setFilteredFoods(filteredData);
       }
+      if (!toggle) {
+        const data = await fetchInitialFood();
+        setFilteredFoods(data);
+      }
     };
     fetchCategoryFood();
-  }, [typeCategoryFood]);
+  }, [typeCategoryFood, toggle]);
 
   useEffect(() => {
     const verifyMeals = () => {
@@ -75,7 +80,14 @@ const Foods = () => {
   };
 
   const handleCategoryFood = (value) => {
+    if (typeCategoryFood === value) {
+      return (
+        setTypeCategoryFood(value),
+        setToggle(!toggle)
+      );
+    }
     setTypeCategoryFood(value);
+    setToggle(true);
   };
 
   return (
