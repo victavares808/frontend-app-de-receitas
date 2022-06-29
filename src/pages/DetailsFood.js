@@ -7,7 +7,7 @@ const DetailsFood = () => {
   const [recommended, setRecommended] = useState([]);
   // const [ingredientObject, setIngredientObject] = useState({});
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     const MAX_INDEX = 6;
