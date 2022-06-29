@@ -72,6 +72,7 @@ const DetailsDrink = () => {
       srcVideo={ null }
       recommended={ recommended }
       id={ id }
+      page="drinks"
     />
   );
 };
