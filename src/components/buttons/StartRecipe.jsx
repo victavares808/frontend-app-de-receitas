@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
-const StartRecipe = ({ id }) => {
+const StartRecipe = ({ id, page, storage }) => {
+  const [inProgress, setInProgress] = useState(false);
   const history = useHistory();
-  const { location: { pathname } } = history;
-  const receitaComida = pathname.includes('foods');
-  const receitaBebida = pathname.includes('drinks');
 
-  const redirect = () => {
-    if (receitaComida) {
-      history.push(`/foods/${id}/in-progress`);
-    }
-    if (receitaBebida) {
-      history.push(`/drinks/${id}/in-progress`);
-    }
+  useEffect(() => {
+    const getStorage = () => {
+      console.log('entrou');
+      if (localStorage.getItem('inProgressRecipes')) {
+        const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes'));
+        const { meals = {}, cocktails = {} } = inProgressObj;
+        const verifyKeysMeals = Object.keys(meals).some((key) => key === id);
+        const verifyKeysCocktails = Object.keys(cocktails).some((key) => key === id);
+        if (page === 'foods') {
+          setInProgress(verifyKeysMeals);
+        }
+        if (page === 'drinks') {
+          setInProgress(verifyKeysCocktails);
+        }
+      }
+    };
+    getStorage();
+  }, [id, page]);
+
+  const onClick = () => {
+    history.push(`/${page}/${id}/in-progress`);
+    storage();
   };
 
   return (
@@ -22,9 +35,9 @@ const StartRecipe = ({ id }) => {
       type="button"
       data-testid="start-recipe-btn"
       style={ { position: 'fixed', bottom: '0px' } }
-      onClick={ () => redirect() }
+      onClick={ () => onClick() }
     >
-      Start Recipe
+      {!inProgress ? 'Start Recipe' : 'Continue Recipe'}
     </button>
   );
 };

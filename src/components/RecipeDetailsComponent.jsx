@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FavoriteButton from './buttons/FavoriteButton';
 import ShareIcon from './buttons/ShareIcon';
 import StartRecipe from './buttons/StartRecipe';
+import { inProgressRecipes } from '../helpers/LocalStorage';
 
 const RecipeDetailsComponent = ({
   srcImage,
-  srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended, id,
+  srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended, id, page,
 }) => {
+  const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    const getLocalStorage = () => {
+      if (localStorage.getItem('doneRecipes')) {
+        const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+        const verify = doneRecipeStorage.some((recipe) => recipe.id === id);
+        setIsDone(verify);
+      }
+    };
+    getLocalStorage();
+  }, [id]);
+
+  const progressRecipeStorage = () => {
+    inProgressRecipes(id, ingredients, page);
+  };
+
   const video = () => (
     <div>
       <h3>Video</h3>
@@ -73,7 +91,12 @@ const RecipeDetailsComponent = ({
         </div>
       </section>
       <section>
-        <StartRecipe id={ id } />
+        {!isDone
+        && <StartRecipe
+          id={ id }
+          page={ page }
+          storage={ progressRecipeStorage }
+        />}
       </section>
     </main>
   );

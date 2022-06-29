@@ -83,6 +83,7 @@ const DetailsFood = () => {
       srcVideo={ newStrYoutube }
       recommended={ recommended }
       id={ id }
+      page="foods"
     />
   );
 };
