@@ -30,7 +30,7 @@ const ExploreByNationalities = () => {
     filteredFoods();
   }, [country]);
 
-  console.log(allFoods, 'a');
+  console.log(allFoods, 'all Foods');
 
   return (
     <div>
