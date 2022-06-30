@@ -5,9 +5,7 @@ import RecipeDetailsComponent from '../components/RecipeDetailsComponent';
 const DetailsFood = () => {
   const [foods, setFoods] = useState([]);
   const [recommended, setRecommended] = useState([]);
-  // const [ingredientObject, setIngredientObject] = useState({});
   const { id } = useParams();
-  // console.log(id);
 
   useEffect(() => {
     const MAX_INDEX = 6;
@@ -65,7 +63,6 @@ const DetailsFood = () => {
   console.log(foods);
 
   const ingredients = getIngredients(foods);
-  // setIngredientObject(foods);
 
   const replaceStrYoutube = (str) => {
     if (str) {
