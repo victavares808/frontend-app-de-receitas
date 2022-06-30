@@ -7,9 +7,39 @@ import { inProgressRecipes } from '../helpers/LocalStorage';
 
 const RecipeDetailsComponent = ({
   srcImage,
-  srcVideo, recipeName, recipeCategory, recipeText, ingredients, recommended, id, page,
+  srcVideo,
+  recipeName,
+  recipeCategory,
+  recipeText, ingredients,
+  recommended,
+  id, page, area, alcoholic, isType, category,
 }) => {
+  const INITIAL_STATE = {
+    id: '',
+    type: '',
+    nationality: '',
+    category: '',
+    alcoholicOrNot: '',
+    name: '',
+    image: '',
+  };
+
+  const [favorites, setFavorites] = useState(INITIAL_STATE);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    const finalState = {
+      id,
+      type: isType,
+      nationality: area,
+      category,
+      alcoholicOrNot: alcoholic,
+      name: recipeName,
+      image: srcImage,
+    };
+    setFavorites(finalState);
+  }, [id, page, area, recipeCategory, alcoholic, recipeName, srcImage, isType, category]);
 
   useEffect(() => {
     const getLocalStorage = () => {
@@ -17,6 +47,17 @@ const RecipeDetailsComponent = ({
         const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
         const verify = doneRecipeStorage.some((recipe) => recipe.id === id);
         setIsDone(verify);
+      }
+    };
+    getLocalStorage();
+  }, [id]);
+
+  useEffect(() => {
+    const getLocalStorage = () => {
+      if (localStorage.getItem('favoriteRecipes')) {
+        const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+        const verify = favoriteStorage.some((recipe) => recipe.id === id);
+        setIsFavorite(verify);
       }
     };
     getLocalStorage();
@@ -31,7 +72,7 @@ const RecipeDetailsComponent = ({
       <h3>Video</h3>
       <video
         data-testid="video"
-        poster={ srcImage }
+        poster={ `${srcImage}/preview` }
       >
         <source src={ srcVideo } />
         <track kind="captions" />
@@ -42,7 +83,11 @@ const RecipeDetailsComponent = ({
   return (
     <main>
       <section>
-        <img data-testid="recipe-photo" src={ srcImage } alt="imagem da receita" />
+        <img
+          data-testid="recipe-photo"
+          src={ `${srcImage}/preview` }
+          alt="imagem da receita"
+        />
         <h2 data-testid="recipe-title">
           {recipeName}
         </h2>
@@ -50,7 +95,7 @@ const RecipeDetailsComponent = ({
           {recipeCategory}
         </h4>
         <ShareIcon />
-        <FavoriteButton />
+        <FavoriteButton favoriteItem={ favorites } isFavorite={ isFavorite } />
       </section>
       <section>
         <h3>Ingredients</h3>
@@ -80,7 +125,8 @@ const RecipeDetailsComponent = ({
             width: '500px',
             height: '230px',
             overflow: 'hidden',
-            overflowY: 'auto' } }
+            overflowY: 'auto',
+          } }
         >
           {recommended.map(({ name, img, type }, index) => (
             <div key={ index } data-testid={ `${index}-recomendation-card` }>
@@ -92,11 +138,11 @@ const RecipeDetailsComponent = ({
       </section>
       <section>
         {!isDone
-        && <StartRecipe
-          id={ id }
-          page={ page }
-          storage={ progressRecipeStorage }
-        />}
+          && <StartRecipe
+            id={ id }
+            page={ page }
+            storage={ progressRecipeStorage }
+          />}
       </section>
     </main>
   );
